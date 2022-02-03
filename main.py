@@ -1,4 +1,14 @@
-import requests #импорт библиотеки
+import requests
 
-response = requests.get('https://playground.learnqa.ru/api/hello') #создание GET-запроса
-print(response.text)
+payload = {"login":"secret_login", "password":"secret_pass"} #готовим данные
+
+response1 = requests.post("https://playground.learnqa.ru/api/get_auth_cookie", data=payload) #передаем данные в data
+cookie_value = response1.cookies.get('auth_cookie')
+
+cookies = {}
+if cookie_value is not None:
+    cookies.update({'auth_cookie': cookie_value})
+
+response2 = requests.post("https://playground.learnqa.ru/api/check_auth_cookie", cookies = cookies)
+
+print(response2.text)
