@@ -3,8 +3,14 @@ from lib.base_case import BaseCase
 from lib.assertions import Assertions
 from datetime import datetime
 import random
+import allure
 
+@allure.epic("Check edit cases")
 class TestUserEdit(BaseCase):
+
+    @allure.description("This test edit of created user")
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.story("positive_case")
     def test_edit_just_created_user(self):
         # REGISTER
         register_data = self.prepare_registration_data()
@@ -56,6 +62,9 @@ class TestUserEdit(BaseCase):
             "Wrong name of the user after edit"
         )
 
+    @allure.description("This test edit of non-authorized user")
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.story("negative_case")
     def test_edit_not_auth_user(self):
         # REGISTER
         register_data = self.prepare_registration_data()
@@ -101,6 +110,9 @@ class TestUserEdit(BaseCase):
             "Wrong name of the user after edit without authorization"
         )
 
+    @allure.description("This test edit by another user")
+    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.story("negative_case")
     def test_edit_user_by_another_user(self):
         # REGISTER (user)
         register_data_user = self.prepare_registration_data()
@@ -177,7 +189,9 @@ class TestUserEdit(BaseCase):
             "Wrong name of the user after edit by another user"
         )
 
-
+    @allure.description("This test edit of email by incorrect value")
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.story("negative_case")
     def test_edit_user_with_incorrect_email(self):
         # REGISTER
         register_data = self.prepare_registration_data()
@@ -232,7 +246,9 @@ class TestUserEdit(BaseCase):
             "Wrong email after edit"
         )
 
-
+    @allure.description("This test edit of name by incorrect short value")
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.story("negative_case")
     def test_edit_user_with_short_username(self) :
         # REGISTER
         register_data = self.prepare_registration_data()
